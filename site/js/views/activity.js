@@ -1,9 +1,9 @@
 // Actividad educativa: ordenar eventos del más antiguo al más reciente.
 // No necesita datos propios: se arma sola con los eventos publicados.
 
-import { data, sortKey } from '../data.js';
+import { data, sortKey, colorClasses } from '../data.js';
 import { t, trText, formatDate, isoDate } from '../i18n.js';
-import { el, trEl, icon, announce } from '../dom.js';
+import { el, trEl, icon, announce, setChildren } from '../dom.js';
 import { ACTIVITY } from '../config.js';
 
 function shuffle(list) {
@@ -71,7 +71,7 @@ export function renderActivity(main) {
     const items = order.map((event, index) => {
       const ok = event === correct[index];
       const title = trText(event.title);
-      return el('li', { class: `sort-item${checked ? (ok ? ' is-correct' : ' is-wrong') : ''}` },
+      return el('li', { class: `sort-item ${colorClasses(event)}${checked ? (ok ? ' is-correct' : ' is-wrong') : ''}` },
         el('span', { class: 'sort-number', 'aria-hidden': 'true' }, String(index + 1)),
         el('div', { class: 'sort-text' },
           trEl('p', { class: 'sort-title' }, event.title, { badge: false }),
@@ -91,7 +91,7 @@ export function renderActivity(main) {
     const perfect = hits === order.length;
     const message = perfect ? t('activity.perfect') : t('activity.result', { n: hits, total: order.length });
 
-    board.replaceChildren(
+    setChildren(board,
       el('ol', { class: 'sort-list' }, items),
       checked && el('p', { class: `activity-result${perfect ? ' is-perfect' : ''}` }, message),
       el('div', { class: 'activity-actions' },

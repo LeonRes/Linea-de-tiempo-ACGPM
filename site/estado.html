@@ -20,16 +20,15 @@
     .status-group > p { color: var(--color-text-soft); margin-bottom: 0.9rem; }
     .status-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
     .status-item { padding: 0.7rem 1rem; background: var(--color-surface); border: 1px solid var(--color-line); border-left: 4px solid var(--level-color); border-radius: var(--radius-sm); }
-    .status-where { display: block; color: var(--color-text-soft); font: 600 var(--text-sm)/1.4 var(--font-ui); }
+    .status-where { display: block; color: var(--color-text-soft); font: 500 var(--text-sm)/1.4 var(--font-display); letter-spacing: 0.02em; }
     .level-error { --level-color: var(--color-wrong); }
-    .level-aviso { --level-color: var(--color-gold); }
-    .level-traduccion { --level-color: var(--color-celeste); }
+    .level-aviso { --level-color: var(--color-warning); }
+    .level-traduccion { --level-color: var(--color-info); }
     .status-updated { margin-top: 1rem; color: var(--color-text-soft); font-size: var(--text-sm); }
   </style>
 </head>
 <body>
   <header class="site-header">
-    <div class="brand-stripe" aria-hidden="true"></div>
     <div class="site-header-inner">
       <a class="brand" href="./">
         <img class="brand-logo" src="img/logo-acgpm.png" alt="" width="52" height="52">
@@ -39,6 +38,7 @@
         </span>
       </a>
     </div>
+    <div class="lanes-stripe" aria-hidden="true"><span class="lane-1"></span><span class="lane-2"></span><span class="lane-3"></span><span class="lane-4"></span></div>
   </header>
 
   <main id="contenido" class="page-head" style="max-width: 52rem; margin: 0 auto; padding-inline: var(--page-gutter); padding-bottom: 4rem;">
@@ -56,7 +56,7 @@
         { level: 'aviso', title: 'Avisos', help: 'Se publicaron, pero conviene revisarlas.' },
         { level: 'traduccion', title: 'Traducciones pendientes', help: 'Se publicaron en español; en galés o inglés se muestra el español con la etiqueta «Traducción pendiente».' }
       ];
-      var TABS = { eventos: 'eventos', recursos: 'recursos', personas: 'personas', lugares: 'lugares', categorias: 'categorías' };
+      var TABS = { eventos: 'eventos', recursos: 'recursos', personas: 'personas', lugares: 'lugares', franjas: 'franjas' };
 
       function el(tag, className, text) {
         var node = document.createElement(tag);
@@ -84,7 +84,7 @@
       var summary = el('div', 'status-summary');
       [
         [stats.events, 'eventos publicados'], [stats.drafts, 'borradores'], [stats.resources, 'recursos'],
-        [stats.people, 'personas'], [stats.places, 'lugares']
+        [stats.people, 'personas'], [stats.places, 'lugares'], [stats.lanes, 'franjas']
       ].forEach(function (pair) {
         var tile = el('div', 'status-tile');
         tile.append(el('strong', '', String(pair[0] || 0)), el('span', '', pair[1]));

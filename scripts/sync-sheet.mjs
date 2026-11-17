@@ -21,7 +21,7 @@ const DATA_DIR = path.join(ROOT, 'site', 'data');
 const MEDIA_DIR = path.join(ROOT, 'site', 'media');
 const CONFIG_FILE = path.join(ROOT, 'scripts', 'sheet.config.json');
 
-const DATA_FILES = { events: 'events.json', people: 'people.json', places: 'places.json', categories: 'categories.json' };
+const DATA_FILES = { events: 'events.json', people: 'people.json', places: 'places.json', lanes: 'lanes.json' };
 const REPORT_FILE = 'sync-report.json';
 
 const HEAVY_IMAGE_BYTES = 1.5 * 1024 * 1024; // aviso: la imagen tarda en cargar
@@ -136,6 +136,7 @@ async function collectDriveFiles(tables, { offline, write }) {
   };
   scan('recursos', 'archivo');
   scan('personas', 'retrato');
+  scan('franjas', 'bandera');
 
   const result = new Map();
   for (const id of ids) {
@@ -198,7 +199,7 @@ function printSummary(stats, issues, changed, dryRun) {
   const count = (level) => issues.filter((issue) => issue.level === level).length;
   const lines = [
     `Eventos publicados: ${stats.events} (borradores: ${stats.drafts})`,
-    `Recursos: ${stats.resources} · Personas: ${stats.people} · Lugares: ${stats.places} · Categorías: ${stats.categories}`,
+    `Recursos: ${stats.resources} · Personas: ${stats.people} · Lugares: ${stats.places} · Franjas: ${stats.lanes}`,
     `Errores: ${count('error')} · Avisos: ${count('aviso')} · Traducciones pendientes: ${count('traduccion')}`,
     !changed ? 'Sin cambios desde la última sincronización.'
       : dryRun ? 'Hay cambios respecto de lo publicado (modo revisión: no se escribió nada).'

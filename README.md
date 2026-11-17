@@ -7,7 +7,7 @@ Línea de tiempo interactiva y trilingüe (español · Cymraeg · English) sobre
 - **Guía para quienes cargan contenido:** [docs/GUIA-EDITORES.md](docs/GUIA-EDITORES.md)
 - **Arquitectura, decisiones y mantenimiento:** [CLAUDE.md](CLAUDE.md)
 
-Incluye línea de tiempo con filtros por categoría, fichas de eventos con fotos, audio, video y enlaces a las colecciones originales, mapa Gales–Patagonia, fichas de personas y una actividad educativa.
+El diseño reproduce la línea de tiempo impresa de la Asociación: franjas con banderas para Gales, Argentina, la colonia galesa y Chubut, barra de décadas y eventos en círculos de color. Incluye fichas de eventos con fotos, audio, video y enlaces a las colecciones originales, mapa Gales–Patagonia, fichas de personas y una actividad educativa.
 
 ## Para desarrollar
 
@@ -28,5 +28,6 @@ npm run revisar     # revisa la planilla sin escribir nada
 ## Créditos
 
 - Mapa: © colaboradores de [OpenStreetMap](https://www.openstreetmap.org/copyright), con [Leaflet](https://leafletjs.com/) (BSD-2).
-- Tipografía: Source Serif 4 (SIL Open Font License).
+- Tipografía: Oswald (SIL Open Font License).
+- Diseño, colores y banderas: tomados de la línea de tiempo impresa de la Asociación Cultural Galesa de Puerto Madryn.
 - Imágenes de muestra: Wikimedia Commons, dominio público; el crédito de cada una figura en su ficha.

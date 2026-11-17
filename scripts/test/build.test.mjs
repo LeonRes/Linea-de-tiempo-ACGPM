@@ -11,7 +11,7 @@ import { build, FatalError, slug, normalizeHeader } from '../lib/build.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const PLANTILLA = path.join(ROOT, 'scripts', 'plantilla');
-const TAB_NAMES = ['categorias', 'lugares', 'personas', 'eventos', 'recursos'];
+const TAB_NAMES = ['franjas', 'lugares', 'personas', 'eventos', 'recursos'];
 
 // Copia fresca de la plantilla como matrices, para modificarla en cada prueba.
 function sampleTables() {
@@ -79,14 +79,18 @@ test('identificadores tolerantes a mayúsculas, acentos y espacios', () => {
 test('la plantilla de muestra se lee sin errores ni avisos', () => {
   const { data, issues, stats } = build(sampleTables());
   assert.deepEqual(issues, []);
-  assert.equal(stats.events, 4);
-  assert.deepEqual(data.events.map((e) => e.id), ['viaje-de-reconocimiento', 'zarpa-el-mimosa', 'desembarco', 'fundacion-de-rawson']);
-  const mimosa = data.events[1];
+  assert.equal(stats.events, 12);
+  assert.equal(stats.lanes, 4);
+  const years = data.events.map((e) => e.year * 10000 + (e.month ?? 0) * 100 + (e.day ?? 0));
+  assert.deepEqual(years, [...years].sort((a, b) => a - b), 'ordenados por fecha');
+  const mimosa = data.events.find((e) => e.id === 'embarque-en-liverpool');
+  assert.equal(mimosa.lane, 'gales');
   assert.equal(mimosa.month, 5);
-  assert.equal(mimosa.day, 28);
+  assert.equal(mimosa.day, 25);
   assert.equal(mimosa.resources.length, 3);
   assert.equal(mimosa.resources[0].src, 'media/mimosa.jpg');
-  assert.equal(data.events[0].endYear, 1863);
+  assert.equal(data.events.find((e) => e.id === 'ley-de-inmigracion').color, 'naranja');
+  assert.equal(data.lanes[0].flag, 'media/franjas/gales.jpg');
 });
 
 test('falta una columna obligatoria: se frena todo', () => {
@@ -128,22 +132,30 @@ test('fechas imposibles', () => {
 
 test('borradores: no se publican y sus recursos no dan error', () => {
   const tables = sampleTables();
-  setCell(tables, 'eventos', 'zarpa-el-mimosa', 'publicado', 'no');
+  setCell(tables, 'eventos', 'embarque-en-liverpool', 'publicado', 'no');
   const result = build(tables);
-  assert.equal(result.data.events.some((e) => e.id === 'zarpa-el-mimosa'), false);
+  assert.equal(result.data.events.some((e) => e.id === 'embarque-en-liverpool'), false);
   assert.equal(result.stats.drafts, 1);
   assert.deepEqual(result.issues, []);
 });
 
-test('categoría, lugar o persona inexistentes: aviso y se publica igual', () => {
+test('franja, color, lugar o persona inexistentes: aviso y se publica igual', () => {
   const tables = sampleTables();
-  setCell(tables, 'eventos', 'desembarco', 'categoria', 'inventada');
+  setCell(tables, 'eventos', 'desembarco', 'franja', 'inventada');
+  setCell(tables, 'eventos', 'desembarco', 'color', 'violeta');
   setCell(tables, 'eventos', 'desembarco', 'personas', 'lewis-jones, nadie');
   const result = build(tables);
   const event = result.data.events.find((e) => e.id === 'desembarco');
-  assert.equal(event.category, undefined);
+  assert.equal(event.lane, 'gales', 'va a la primera franja');
+  assert.equal(event.color, undefined);
   assert.deepEqual(event.people, ['lewis-jones']);
-  assert.equal(issuesFor(result, 'desembarco').filter((i) => i.level === 'aviso').length, 2);
+  assert.equal(issuesFor(result, 'desembarco').filter((i) => i.level === 'aviso').length, 3);
+});
+
+test('colores escritos con mayúsculas o acentos', () => {
+  const tables = sampleTables();
+  setCell(tables, 'eventos', 'desembarco', 'color', 'Bordó');
+  assert.equal(build(tables).data.events.find((e) => e.id === 'desembarco').color, 'bordo');
 });
 
 test('acepta referencias escritas «a mano» (mayúsculas y acentos)', () => {
@@ -192,6 +204,6 @@ test('recursos: tipo desconocido, enlace sin dirección e imagen sin descripció
 
 test('el script de sincronización funciona en modo revisión con la plantilla', () => {
   const output = execFileSync(process.execPath, [path.join(ROOT, 'scripts', 'sync-sheet.mjs'), '--desde', PLANTILLA, '--revisar'], { encoding: 'utf8' });
-  assert.match(output, /Eventos publicados: 4/);
+  assert.match(output, /Eventos publicados: 12/);
   assert.match(output, /Errores: 0/);
 });

@@ -8,7 +8,7 @@ export const DATA_FILES = {
   events: 'data/events.json',
   people: 'data/people.json',
   places: 'data/places.json',
-  categories: 'data/categories.json',
+  lanes: 'data/lanes.json',
 };
 export const UI_STRINGS_FILE = 'i18n/ui.json';
 
@@ -19,6 +19,9 @@ export const MAP = {
   maxZoom: 18,
   placeZoom: 10,
 };
+
+// Línea de tiempo: debajo de este ancho de pantalla se muestra siempre como lista.
+export const TIMELINE = { listQuery: '(max-width: 47.99rem)' };
 
 // Cantidad de eventos que se usan en la actividad «ordená los eventos».
 export const ACTIVITY = { minEvents: 3, maxEvents: 5 };

@@ -23,6 +23,12 @@ export function el(tag, attrs = {}, ...children) {
   return node;
 }
 
+// Reemplaza el contenido de un nodo ignorando los valores vacíos o false que dejan
+// las condiciones (replaceChildren los convertiría en el texto «false»).
+export function setChildren(node, ...children) {
+  node.replaceChildren(...children.flat().filter((child) => child !== null && child !== undefined && child !== false));
+}
+
 // Texto traducible. Si se muestra en otro idioma (falta la traducción) lo marca con `lang`
 // para los lectores de pantalla y agrega la etiqueta «traducción pendiente».
 export function trEl(tag, attrs, field, { badge = true } = {}) {

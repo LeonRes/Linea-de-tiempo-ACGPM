@@ -1,6 +1,6 @@
 // Ficha de un evento o de una persona. Se muestra en una ventana (<dialog>) sobre la vista actual.
 
-import { data, categoryOf, placeOf, peopleOf, eventsOf, categoryColor } from './data.js';
+import { data, laneOf, placeOf, peopleOf, eventsOf, colorClasses } from './data.js';
 import { t, tr, trText, formatDate, isoDate, getLang } from './i18n.js';
 import { el, trEl, paragraphs, icon, safeUrl, isExternal, externalLink, announce } from './dom.js';
 import { VIDEO_EMBED_PREFIXES } from './config.js';
@@ -63,7 +63,8 @@ async function copyLink() {
 // Evento
 
 export function showEvent(event) {
-  const category = categoryOf(event);
+  const lane = laneOf(event);
+  const flag = safeUrl(lane?.flag);
   const place = placeOf(event);
   const people = peopleOf(event);
   const resources = event.resources ?? [];
@@ -75,11 +76,11 @@ export function showEvent(event) {
   const previous = data.events[index - 1];
   const next = data.events[index + 1];
 
-  show(el('article', { class: 'detail-content', style: `--cat-color: ${categoryColor(event)}` },
+  show(el('article', { class: `detail-content ${colorClasses(event)}` },
     el('header', { class: 'detail-header' },
-      el('p', { class: 'event-meta' },
-        el('time', { datetime: isoDate(event) }, formatDate(event)),
-        category && el('span', { class: 'event-cat' }, trText(category.name)),
+      el('p', { class: 'detail-meta' },
+        el('time', { class: 'detail-date', datetime: isoDate(event) }, formatDate(event)),
+        lane && el('span', { class: 'detail-lane' }, flag && el('img', { src: flag, alt: '' }), trText(lane.name)),
       ),
       trEl('h2', { id: 'detalle-titulo', tabindex: '-1' }, event.title),
       place && el('p', { class: 'detail-place' },

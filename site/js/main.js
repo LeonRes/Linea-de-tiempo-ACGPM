@@ -116,8 +116,18 @@ function changeLang(lang) {
   route({ force: true });
 }
 
+// Alto de la barra de secciones fija, para que lo que queda fijo debajo no se superponga.
+function trackNavHeight() {
+  const nav = document.querySelector('.main-nav');
+  if (!nav) return;
+  const update = () => document.documentElement.style.setProperty('--nav-height', `${nav.offsetHeight}px`);
+  new ResizeObserver(update).observe(nav);
+  update();
+}
+
 async function start() {
   setLang(detectLang());
+  trackNavHeight();
   try {
     await Promise.all([loadStrings(), loadData()]);
   } catch (error) {

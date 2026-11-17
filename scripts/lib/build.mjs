@@ -10,12 +10,15 @@ const LANG_NAMES = { es: 'español', cy: 'galés', en: 'inglés' };
 
 // Pestañas que se leen y las columnas sin las cuales no se puede trabajar.
 export const TABS = {
-  categorias: ['id', 'nombre_es'],
+  franjas: ['id', 'nombre_es'],
   lugares: ['id', 'nombre_es', 'latitud', 'longitud'],
   personas: ['id', 'nombre'],
   eventos: ['id', 'anio', 'titulo_es'],
   recursos: ['evento', 'tipo', 'archivo'],
 };
+
+// Colores de círculo que se pueden elegir en la columna «color» de los eventos (los define theme.css).
+export const BUBBLE_COLORS = ['verde', 'azul', 'bordo', 'naranja', 'gris', 'blanco'];
 
 const RESOURCE_TYPES = {
   imagen: 'image', foto: 'image', image: 'image',
@@ -119,7 +122,7 @@ export function build(tables, options = {}) {
   const previous = structuredClone(options.previous ?? {});
   const resolveFile = options.resolveFile ?? defaultResolveFile;
   const issues = [];
-  const stats = { events: 0, drafts: 0, resources: 0, people: 0, places: 0, categories: 0 };
+  const stats = { events: 0, drafts: 0, resources: 0, people: 0, places: 0, lanes: 0 };
 
   const report = (level, tab, row, id, message) => issues.push({ level, tab, row, id: id || '', message });
 
@@ -162,14 +165,20 @@ export function build(tables, options = {}) {
     return list;
   };
 
-  // --- categorías ---------------------------------------------------------
-  const categories = readEntities('categorias', previous.categories, ({ row, cells, id, fail }) => {
+  // --- franjas (Gales, Argentina, colonia galesa, Chubut…) -----------------
+  const lanes = readEntities('franjas', previous.lanes, ({ row, cells, id, fail }) => {
     const name = texts(cells, 'nombre');
     if (!name.es) fail('Falta el nombre en español.');
-    pendingTranslations('categorias', row, id, { nombre: name });
-    return { id, name };
+    pendingTranslations('franjas', row, id, { nombre: name });
+    const lane = { id, name };
+    if (cells.bandera) {
+      const file = resolveFile(classifyRef(cells.bandera), 'image');
+      if (file.error) report('aviso', 'franjas', row, id, `Bandera: ${file.error} Se publica sin bandera.`);
+      else lane.flag = file.src;
+    }
+    return lane;
   });
-  const categoryIds = new Set(categories.map((c) => c.id));
+  const laneIds = new Set(lanes.map((lane) => lane.id));
 
   // --- lugares ------------------------------------------------------------
   const places = readEntities('lugares', previous.places, ({ row, cells, id, fail }) => {
@@ -251,10 +260,18 @@ export function build(tables, options = {}) {
       else if (endYear > year) event.endYear = endYear;
     }
 
-    if (cells.categoria) {
-      const category = slug(cells.categoria);
-      if (categoryIds.has(category)) event.category = category;
-      else report('aviso', 'eventos', row, id, `La categoría «${cells.categoria}» no existe en la pestaña «categorias». El evento se publica sin categoría.`);
+    if (cells.franja) {
+      const lane = slug(cells.franja);
+      if (laneIds.has(lane)) event.lane = lane;
+      else report('aviso', 'eventos', row, id, `La franja «${cells.franja}» no existe en la pestaña «franjas». El evento se publica en la primera franja.`);
+    } else {
+      report('aviso', 'eventos', row, id, 'Falta la franja. El evento se publica en la primera franja.');
+    }
+    event.lane ??= lanes[0]?.id;
+    if (cells.color) {
+      const color = slug(cells.color).replace(/-/g, '');
+      if (BUBBLE_COLORS.includes(color)) event.color = color;
+      else report('aviso', 'eventos', row, id, `El color «${cells.color}» no existe. Usá: ${BUBBLE_COLORS.join(', ')}. Se usa el color de la franja.`);
     }
     if (cells.lugar) {
       const place = slug(cells.lugar);
@@ -353,9 +370,9 @@ export function build(tables, options = {}) {
   stats.events = events.length;
   stats.people = people.length;
   stats.places = places.length;
-  stats.categories = categories.length;
+  stats.lanes = lanes.length;
 
-  return { data: { events, people, places, categories }, issues, stats };
+  return { data: { events, people, places, lanes }, issues, stats };
 }
 
 // Sin acceso a disco ni a la red: los archivos locales se dan por buenos.

@@ -35,7 +35,22 @@
 
   "pending": { "es": "Traducción pendiente", "cy": "Cyfieithiad i ddod", "en": "Translation pending" },
 
-  "filter.label": { "es": "Filtrar por categoría", "cy": "Hidlo yn ôl categori", "en": "Filter by category" },
+  "filter.label": { "es": "Mostrar franjas", "cy": "Dangos stribedi", "en": "Show bands" },
+  "view.label": { "es": "Vista", "cy": "Golwg", "en": "View" },
+  "view.board": { "es": "Línea", "cy": "Llinell", "en": "Timeline" },
+  "view.list": { "es": "Lista", "cy": "Rhestr", "en": "List" },
+  "board.label": {
+    "es": "Línea de tiempo por franjas: Gales, Argentina, la colonia galesa y Chubut",
+    "cy": "Llinell amser fesul stribed: Cymru, yr Ariannin, y Wladfa a Chubut",
+    "en": "Timeline by band: Wales, Argentina, the Welsh settlement and Chubut"
+  },
+  "board.prev": { "es": "Ver años anteriores", "cy": "Gweld blynyddoedd cynharach", "en": "Show earlier years" },
+  "board.next": { "es": "Ver años posteriores", "cy": "Gweld blynyddoedd diweddarach", "en": "Show later years" },
+  "board.hint": {
+    "es": "Deslizá o arrastrá la línea hacia los costados para recorrer los años. Tocá un círculo para leer más.",
+    "cy": "Llusgwch y llinell i'r ochr i symud drwy'r blynyddoedd. Cliciwch ar gylch i ddarllen mwy.",
+    "en": "Scroll or drag the timeline sideways to move through the years. Select a circle to read more."
+  },
   "filter.all": { "es": "Todas", "cy": "Pob un", "en": "All" },
   "timeline.count": { "es": "Eventos a la vista: {n}", "cy": "Digwyddiadau i'w gweld: {n}", "en": "Events shown: {n}" },
   "timeline.empty": {
