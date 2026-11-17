@@ -1,0 +1,57 @@
+[
+  {
+    "id": "michael-d-jones",
+    "name": "Michael D. Jones",
+    "born": 1822,
+    "died": 1898,
+    "role": {
+      "es": "Principal impulsor de la colonia",
+      "cy": "Prif symbylydd y Wladfa",
+      "en": "Chief promoter of the settlement"
+    },
+    "bio": {
+      "es": "Pastor y director del colegio independiente de Bala, en el norte de Gales. Defendió la idea de una colonia donde los galeses pudieran conservar su lengua, su religión y sus costumbres, y sostuvo el proyecto con sus propios recursos.",
+      "cy": "Gweinidog a phrifathro Coleg yr Annibynwyr yn y Bala. Hyrwyddodd y syniad o wladfa lle gallai'r Cymry gadw eu hiaith, eu crefydd a'u harferion, a chynhaliodd y fenter â'i arian ei hun.",
+      "en": "Minister and principal of the Independent College at Bala, in north Wales. He championed the idea of a settlement where the Welsh could keep their language, religion and customs, and supported the venture with his own money."
+    },
+    "portrait": "media/michael-d-jones.jpg",
+    "portraitCredit": "John Thomas, c. 1885. Biblioteca Nacional de Gales, vía Wikimedia Commons. Dominio público."
+  },
+  {
+    "id": "lewis-jones",
+    "name": "Lewis Jones",
+    "born": 1837,
+    "died": 1904,
+    "role": {
+      "es": "Explorador y dirigente de la colonia",
+      "cy": "Arloeswr ac arweinydd yn y Wladfa",
+      "en": "Pioneer and leader of the settlement"
+    },
+    "bio": {
+      "es": "Imprentero nacido en Caernarfon. En 1862–63 viajó a la Patagonia con Love Jones-Parry para conocer el valle del Chubut y negociar con el gobierno argentino. Fue una de las figuras centrales de la colonia. La ciudad de Trelew («pueblo de Lew») lleva su nombre.",
+      "cy": "Argraffydd a aned yng Nghaernarfon. Ym 1862–63 teithiodd i Batagonia gyda Love Jones-Parry i weld dyffryn Camwy ac i drafod â llywodraeth yr Ariannin. Bu'n un o ffigurau canolog y Wladfa. Enwyd tref Trelew («tref Lew») ar ei ôl.",
+      "en": "A printer born in Caernarfon. In 1862–63 he travelled to Patagonia with Love Jones-Parry to see the Chubut valley and negotiate with the Argentine government. He was one of the central figures of the settlement. The town of Trelew (\"Lew's town\") is named after him."
+    },
+    "portrait": "media/lewis-jones.jpg",
+    "portraitCredit": "Autor desconocido, c. 1860. Trevelin Imágenes, vía Wikimedia Commons. Dominio público.",
+    "link": "https://biography.wales/article/s-JONE-LEW-1836"
+  },
+  {
+    "id": "love-jones-parry",
+    "name": "Love Jones-Parry",
+    "born": 1832,
+    "died": 1891,
+    "role": {
+      "es": "Integrante del viaje de reconocimiento",
+      "cy": "Aelod o'r daith archwilio",
+      "en": "Member of the exploratory voyage"
+    },
+    "bio": {
+      "es": "Terrateniente de Madryn, en la península de Llŷn, al norte de Gales. Acompañó a Lewis Jones en el viaje de 1862–63. El nombre de su propiedad quedó en la bahía donde hoy está Puerto Madryn.",
+      "cy": "Tirfeddiannwr o Fadryn, ym Mhen Llŷn. Aeth gyda Lewis Jones ar daith 1862–63. Rhoddwyd enw ei ystâd ar y bae lle saif Porth Madryn heddiw.",
+      "en": "A landowner from Madryn, on the Llŷn peninsula in north Wales. He accompanied Lewis Jones on the voyage of 1862–63. The name of his estate was given to the bay where Puerto Madryn stands today."
+    },
+    "portrait": "media/love-jones-parry.jpg",
+    "portraitCredit": "Autor desconocido. Vía Wikimedia Commons. Dominio público."
+  }
+]

@@ -1,0 +1,28 @@
+# Pruebas para ramas de trabajo y pull requests: no publica nada.
+# Corre las pruebas del código y revisa la planilla real con el mismo validador que usa la publicación.
+
+name: Pruebas
+
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Probar el código
+        run: npm test
+
+      - name: Revisar la planilla (sin publicar)
+        run: node scripts/sync-sheet.mjs --revisar

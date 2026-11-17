@@ -1,0 +1,38 @@
+[
+  {
+    "id": "gales",
+    "name": {
+      "es": "Gales",
+      "cy": "Cymru",
+      "en": "Wales"
+    },
+    "flag": "media/franjas/gales.jpg"
+  },
+  {
+    "id": "argentina",
+    "name": {
+      "es": "Argentina",
+      "cy": "Yr Ariannin",
+      "en": "Argentina"
+    },
+    "flag": "media/franjas/argentina.jpg"
+  },
+  {
+    "id": "colonia-galesa",
+    "name": {
+      "es": "La colonia galesa",
+      "cy": "Y Wladfa",
+      "en": "The Welsh settlement"
+    },
+    "flag": "media/franjas/colonia-galesa.jpg"
+  },
+  {
+    "id": "chubut",
+    "name": {
+      "es": "Chubut y Puerto Madryn",
+      "cy": "Chubut a Phorth Madryn",
+      "en": "Chubut and Puerto Madryn"
+    },
+    "flag": "media/franjas/chubut.jpg"
+  }
+]

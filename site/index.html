@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>De Gales a la Patagonia: una historia compartida</title>
+  <meta name="description" content="Línea de tiempo interactiva sobre la colonia galesa del Chubut. Llinell amser ryngweithiol am y Wladfa Gymreig. An interactive timeline of the Welsh settlement in Patagonia.">
+  <meta property="og:title" content="De Gales a la Patagonia: una historia compartida">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/logo-acgpm.png">
+  <meta name="theme-color" content="#47443f">
+  <link rel="icon" href="img/logo-acgpm.png">
+  <link rel="preload" href="fonts/oswald-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- theme.css: colores, tipografías y medidas. styles.css: todo lo demás. -->
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido" data-i18n="a11y.skip">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="#/">
+        <img class="brand-logo" src="img/logo-acgpm.png" alt="" width="56" height="56">
+        <span class="brand-text">
+          <span class="brand-title" data-i18n="site.title">De Gales a la Patagonia</span>
+          <span class="brand-subtitle" data-i18n="site.subtitle">Una historia compartida</span>
+        </span>
+      </a>
+
+      <!-- Los nombres de los idiomas van siempre en su propio idioma. -->
+      <nav class="lang-switch" aria-label="Idioma" data-i18n-attr="aria-label: lang.label">
+        <a href="?lang=es" data-lang="es" lang="es" hreflang="es"><span class="lang-name">Español</span><abbr class="lang-code" title="Español">ES</abbr></a>
+        <a href="?lang=cy" data-lang="cy" lang="cy" hreflang="cy"><span class="lang-name">Cymraeg</span><abbr class="lang-code" title="Cymraeg">CY</abbr></a>
+        <a href="?lang=en" data-lang="en" lang="en" hreflang="en"><span class="lang-name">English</span><abbr class="lang-code" title="English">EN</abbr></a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Fuera de <header> para que quede fija arriba al desplazar la página. -->
+  <nav class="main-nav" aria-label="Secciones" data-i18n-attr="aria-label: nav.sections">
+    <div class="main-nav-inner">
+      <a href="#/" data-view="timeline" data-i18n="nav.timeline">Línea de tiempo</a>
+      <a href="#/mapa" data-view="map" data-i18n="nav.map">Mapa</a>
+      <a href="#/personas" data-view="people" data-i18n="nav.people">Personas</a>
+      <a href="#/actividad" data-view="activity" data-i18n="nav.activity">Actividad</a>
+    </div>
+    <div class="lanes-stripe" aria-hidden="true"><span class="lane-1"></span><span class="lane-2"></span><span class="lane-3"></span><span class="lane-4"></span></div>
+  </nav>
+
+  <main id="contenido" tabindex="-1">
+    <noscript>
+      <p class="notice">Esta página necesita JavaScript para mostrar la línea de tiempo. / Mae angen JavaScript ar y dudalen hon. / This page needs JavaScript to show the timeline.</p>
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <img class="footer-logo" src="img/logo-acgpm.png" alt="" width="72" height="72" loading="lazy">
+      <div>
+        <p class="footer-org">Asociación Cultural Galesa de Puerto Madryn</p>
+        <p data-i18n="footer.project">Un proyecto de la Asociación Cultural Galesa de Puerto Madryn, Chubut, Argentina.</p>
+        <p><a href="https://www.asociaciongalesmadryn.org/" rel="noopener">asociaciongalesmadryn.org</a></p>
+        <p class="footer-note" data-i18n="site.notice"></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Ficha de evento o de persona (la completa js/detail.js). -->
+  <dialog id="detalle" class="detail"></dialog>
+
+  <!-- Mensajes para lectores de pantalla (la completa js/dom.js). -->
+  <div id="avisos" class="visually-hidden" role="status" aria-live="polite"></div>
+</body>
+</html>

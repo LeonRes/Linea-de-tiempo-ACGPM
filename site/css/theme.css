@@ -1,0 +1,107 @@
+/* ==========================================================================
+   TEMA — acá se cambia el aspecto del sitio.
+
+   Este archivo solo define valores (colores, tipografías, medidas).
+   El resto del CSS (styles.css) los usa por nombre y no tiene colores propios:
+   para actualizar el estilo alcanza con editar este archivo.
+
+   Paleta actual: tomada de la línea de tiempo impresa de la Asociación
+   (franjas beige, gris azulado, verde y amarilla; barra de años gris oscura;
+   círculos verdes, azules, bordó, naranjas y blancos).
+   ========================================================================== */
+
+:root {
+  /* --- Base ------------------------------------------------------------- */
+  --color-ink: #47443f;           /* barra de años, cabecera y pie */
+  --color-ink-contrast: #ffffff;  /* texto sobre --color-ink */
+  --color-ink-soft: #5d5a54;      /* separadores sobre --color-ink */
+  --color-bg: #f6f3ea;            /* fondo de la página */
+  --color-surface: #ffffff;       /* fichas y tarjetas */
+  --color-surface-soft: #eeeae0;  /* fondos suaves: avisos, botones */
+  --color-text: #2b2925;
+  --color-text-soft: #4e4a43;     /* fechas, créditos (legible también sobre las franjas) */
+  --color-line: #d9d3c4;
+  --color-focus: #0a6d94;         /* borde de foco del teclado */
+  --color-backdrop: rgb(43 41 37 / 0.62); /* fondo detrás de una ficha abierta */
+  --color-shadow: rgb(43 41 37 / 0.28);
+
+  --color-accent: #c9141b;        /* rojo del dragón del logo: botones principales */
+  --color-accent-dark: #a41d20;
+  --color-accent-contrast: #ffffff;
+  --color-link: #8e4f45;
+  --color-highlight: #e5de96;     /* subrayado de la sección activa */
+  --color-ok: #2f6b45;
+  --color-wrong: #c9141b;
+  --color-warning: #9a6410;
+  --color-info: #0a6d94;
+
+  /* --- Franjas -----------------------------------------------------------
+     Cada franja de la planilla toma estos valores según su orden:
+     la primera usa --lane-1-*, la segunda --lane-2-*, etc. (desde la séptima se repiten).
+     bg = fondo de la franja · bubble = color de los círculos que no indican otro color. */
+  --lane-1-bg: #eedfa8;  --lane-1-bubble: var(--bubble-verde-bg);  --lane-1-bubble-fg: var(--bubble-verde-fg);  --lane-1-bubble-border: var(--bubble-verde-border);
+  --lane-2-bg: #c5cdd8;  --lane-2-bubble: var(--bubble-azul-bg);   --lane-2-bubble-fg: var(--bubble-azul-fg);   --lane-2-bubble-border: var(--bubble-azul-border);
+  --lane-3-bg: #bbc890;  --lane-3-bubble: var(--bubble-verde-bg);  --lane-3-bubble-fg: var(--bubble-verde-fg);  --lane-3-bubble-border: var(--bubble-verde-border);
+  --lane-4-bg: #e5de96;  --lane-4-bubble: var(--bubble-blanco-bg); --lane-4-bubble-fg: var(--bubble-blanco-fg); --lane-4-bubble-border: var(--bubble-blanco-border);
+  --lane-5-bg: #dcd3c8;  --lane-5-bubble: var(--bubble-bordo-bg);  --lane-5-bubble-fg: var(--bubble-bordo-fg);  --lane-5-bubble-border: var(--bubble-bordo-border);
+  --lane-6-bg: #cfdcdc;  --lane-6-bubble: var(--bubble-gris-bg);   --lane-6-bubble-fg: var(--bubble-gris-fg);   --lane-6-bubble-border: var(--bubble-gris-border);
+
+  /* --- Colores de círculo (columna «color» de la planilla) --------------- */
+  --bubble-verde-bg: #324e40;   --bubble-verde-fg: #ffffff;   --bubble-verde-border: transparent;
+  --bubble-azul-bg: #3a3e52;    --bubble-azul-fg: #ffffff;    --bubble-azul-border: transparent;
+  --bubble-bordo-bg: #8e4f45;   --bubble-bordo-fg: #ffffff;   --bubble-bordo-border: transparent;
+  --bubble-naranja-bg: #df9d36; --bubble-naranja-fg: #2b2118; --bubble-naranja-border: transparent;
+  --bubble-gris-bg: #494442;    --bubble-gris-fg: #ffffff;    --bubble-gris-border: transparent;
+  --bubble-blanco-bg: #f7f7f4;  --bubble-blanco-fg: #2b2925;  --bubble-blanco-border: #47443f;
+
+  /* --- Tipografía ------------------------------------------------------- */
+  --font-display: 'Oswald', 'Arial Narrow', 'Roboto Condensed', sans-serif; /* años, títulos, círculos */
+  --font-text: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* textos largos */
+  --weight-display: 600;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.75rem, 1.35rem + 1.8vw, 2.4rem);
+  --text-3xl: clamp(2.2rem, 1.5rem + 3.4vw, 3.6rem);
+
+  /* --- Forma y espacio -------------------------------------------------- */
+  --radius: 12px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 2px rgb(43 41 37 / 0.08), 0 3px 10px rgb(43 41 37 / 0.10);
+  --shadow-lift: 0 3px 6px rgb(43 41 37 / 0.14), 0 12px 26px rgb(43 41 37 / 0.18);
+  --shadow-pin: 0 2px 6px rgb(0 0 0 / 0.35);
+  --page-width: 76rem;
+  --page-gutter: clamp(1rem, 4vw, 2rem);
+
+  /* --- Línea de tiempo por franjas ------------------------------------- */
+  --bubble-size: 7.5rem;       /* diámetro de los círculos */
+  --bubble-gap: 0.6rem;
+  --lane-label-width: 8.5rem;  /* columna de las banderas */
+  --period-min-width: 5.5rem;  /* ancho mínimo de una década sin eventos */
+}
+
+/* --- Fuentes ------------------------------------------------------------
+   Oswald (licencia libre OFL), alojada en el propio sitio. Es la letra
+   condensada más parecida a la del afiche. El archivo «latin-ext» trae
+   las letras galesas ŵ y ŷ.
+   Para cambiar de tipografía: reemplazar los archivos de /fonts, estas
+   reglas y las variables --font-* de arriba. */
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url('../fonts/oswald-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url('../fonts/oswald-latin-ext-wght-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}

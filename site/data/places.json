@@ -1,0 +1,77 @@
+[
+  {
+    "id": "bala",
+    "name": {
+      "es": "Bala",
+      "cy": "Y Bala",
+      "en": "Bala"
+    },
+    "lat": 52.911,
+    "lon": -3.596,
+    "description": {
+      "es": "Pueblo del norte de Gales donde enseñaba Michael D. Jones y donde nació una de las sociedades de emigración.",
+      "cy": "Tref yng ngogledd Cymru lle'r oedd Michael D. Jones yn dysgu, ac un o gartrefi'r mudiad ymfudo.",
+      "en": "A town in north Wales where Michael D. Jones taught, and one of the homes of the emigration movement."
+    }
+  },
+  {
+    "id": "liverpool",
+    "name": {
+      "es": "Liverpool",
+      "cy": "Lerpwl",
+      "en": "Liverpool"
+    },
+    "lat": 53.4084,
+    "lon": -2.9916,
+    "description": {
+      "es": "Puerto inglés donde embarcaron los pioneros galeses en 1865.",
+      "cy": "Y porthladd yn Lloegr lle aeth yr arloeswyr Cymreig ar fwrdd y Mimosa ym 1865.",
+      "en": "The English port where the Welsh pioneers boarded the Mimosa in 1865."
+    }
+  },
+  {
+    "id": "buenos-aires",
+    "name": {
+      "es": "Buenos Aires",
+      "cy": "Buenos Aires",
+      "en": "Buenos Aires"
+    },
+    "lat": -34.6037,
+    "lon": -58.3816,
+    "description": {
+      "es": "Capital argentina, donde se negoció con el gobierno nacional el establecimiento de la colonia.",
+      "cy": "Prifddinas yr Ariannin, lle y trafodwyd sefydlu'r Wladfa â'r llywodraeth genedlaethol.",
+      "en": "Argentina's capital, where the founding of the settlement was negotiated with the national government."
+    }
+  },
+  {
+    "id": "puerto-madryn",
+    "name": {
+      "es": "Puerto Madryn",
+      "cy": "Porth Madryn",
+      "en": "Puerto Madryn"
+    },
+    "lat": -42.7692,
+    "lon": -65.0385,
+    "description": {
+      "es": "Sobre el Golfo Nuevo. En Punta Cuevas desembarcaron los colonos galeses.",
+      "cy": "Ar lan y Bae Newydd (Golfo Nuevo). Yn Punta Cuevas y glaniodd yr ymfudwyr o Gymru.",
+      "en": "On Golfo Nuevo (New Bay). The Welsh settlers came ashore at Punta Cuevas."
+    }
+  },
+  {
+    "id": "rawson",
+    "name": {
+      "es": "Rawson",
+      "cy": "Trerawson",
+      "en": "Rawson"
+    },
+    "lat": -43.3002,
+    "lon": -65.1023,
+    "description": {
+      "es": "Primer pueblo de la colonia, cerca de la desembocadura del río Chubut.",
+      "cy": "Tref gyntaf y Wladfa, ger aber afon Camwy.",
+      "en": "The first town of the settlement, near the mouth of the Chubut river."
+    }
+  }
+]

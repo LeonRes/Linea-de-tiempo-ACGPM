@@ -1,0 +1,89 @@
+# Lee la planilla de Google, guarda los cambios en el repositorio y publica el sitio en GitHub Pages.
+#
+# Se ejecuta:
+#   - cada hora (solo publica si la planilla cambió),
+#   - cada vez que se sube un cambio a main,
+#   - a mano: pestaña Actions → «Publicar sitio» → Run workflow.
+#
+# Si la planilla no se puede leer, el sitio queda como estaba y la ejecución se marca con error
+# (GitHub avisa por correo).
+
+name: Publicar sitio
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write   # guardar en el repositorio los datos nuevos de la planilla
+  pages: write      # publicar en GitHub Pages
+  id-token: write
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    runs-on: ubuntu-latest
+    outputs:
+      planilla_ok: ${{ steps.sync.outcome == 'success' }}
+      publicar: ${{ steps.decidir.outputs.publicar }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Probar el código
+        run: npm test
+
+      - name: Leer la planilla
+        id: sync
+        continue-on-error: true
+        run: node scripts/sync-sheet.mjs
+
+      - name: Guardar los cambios de la planilla
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data site/media
+          git commit -m "Actualizar contenido desde la planilla"
+          git pull --rebase
+          git push
+
+      - name: Decidir si hay que publicar
+        id: decidir
+        run: echo "publicar=${{ steps.sync.outputs.changed == 'true' || github.event_name != 'schedule' }}" >> "$GITHUB_OUTPUT"
+
+      - name: Preparar los archivos del sitio
+        if: steps.decidir.outputs.publicar == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  desplegar:
+    needs: sincronizar
+    if: needs.sincronizar.outputs.publicar == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  avisar:
+    needs: sincronizar
+    if: needs.sincronizar.outputs.planilla_ok != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "::error title=No se pudo leer la planilla::La web quedó como estaba. El motivo está en el paso «Leer la planilla» del trabajo «sincronizar»."
+          exit 1
