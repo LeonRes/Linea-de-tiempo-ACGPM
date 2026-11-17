@@ -1,0 +1,26 @@
+[
+  {
+    "id": "preparativos",
+    "name": {
+      "es": "Preparativos",
+      "cy": "Paratoadau",
+      "en": "Preparations"
+    }
+  },
+  {
+    "id": "viaje",
+    "name": {
+      "es": "El viaje",
+      "cy": "Y fordaith",
+      "en": "The voyage"
+    }
+  },
+  {
+    "id": "colonia",
+    "name": {
+      "es": "La colonia",
+      "cy": "Y Wladfa",
+      "en": "The settlement"
+    }
+  }
+]

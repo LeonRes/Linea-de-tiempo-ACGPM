@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estado de la planilla · De Gales a la Patagonia</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="img/logo-acgpm.png">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Estilos propios de esta página (los colores vienen de theme.css). */
+    .status-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+    .status-tile { padding: 0.9rem 1rem; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius); }
+    .status-tile strong { display: block; font: var(--weight-display) var(--text-2xl)/1.1 var(--font-display); }
+    .status-tile span { color: var(--color-text-soft); font-size: var(--text-sm); }
+    .status-ok { padding: 1rem 1.25rem; border-left: 4px solid var(--color-ok); border-radius: var(--radius-sm); background: var(--color-surface); }
+    .status-group { margin-top: 2rem; }
+    .status-group h2 { font-size: var(--text-xl); margin-bottom: 0.4rem; }
+    .status-group > p { color: var(--color-text-soft); margin-bottom: 0.9rem; }
+    .status-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+    .status-item { padding: 0.7rem 1rem; background: var(--color-surface); border: 1px solid var(--color-line); border-left: 4px solid var(--level-color); border-radius: var(--radius-sm); }
+    .status-where { display: block; color: var(--color-text-soft); font: 600 var(--text-sm)/1.4 var(--font-ui); }
+    .level-error { --level-color: var(--color-wrong); }
+    .level-aviso { --level-color: var(--color-gold); }
+    .level-traduccion { --level-color: var(--color-celeste); }
+    .status-updated { margin-top: 1rem; color: var(--color-text-soft); font-size: var(--text-sm); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-stripe" aria-hidden="true"></div>
+    <div class="site-header-inner">
+      <a class="brand" href="./">
+        <img class="brand-logo" src="img/logo-acgpm.png" alt="" width="52" height="52">
+        <span class="brand-text">
+          <span class="brand-title">De Gales a la Patagonia</span>
+          <span class="brand-subtitle">Estado de la planilla</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main id="contenido" class="page-head" style="max-width: 52rem; margin: 0 auto; padding-inline: var(--page-gutter); padding-bottom: 4rem;">
+    <h1>Estado de la planilla</h1>
+    <p class="page-lead">Resultado de la última vez que el sitio leyó la planilla de Google. Si cargaste algo y no aparece en la web, la explicación está acá.</p>
+    <div id="estado"><p>Cargando…</p></div>
+  </main>
+
+  <script>
+    // Página independiente del resto del sitio: lee data/sync-report.json y lo muestra.
+    (async function () {
+      var box = document.getElementById('estado');
+      var GROUPS = [
+        { level: 'error', title: 'Errores', help: 'Estas filas no se publicaron (o se mantuvo la versión anterior). Hay que corregirlas en la planilla.' },
+        { level: 'aviso', title: 'Avisos', help: 'Se publicaron, pero conviene revisarlas.' },
+        { level: 'traduccion', title: 'Traducciones pendientes', help: 'Se publicaron en español; en galés o inglés se muestra el español con la etiqueta «Traducción pendiente».' }
+      ];
+      var TABS = { eventos: 'eventos', recursos: 'recursos', personas: 'personas', lugares: 'lugares', categorias: 'categorías' };
+
+      function el(tag, className, text) {
+        var node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+
+      try {
+        var response = await fetch('data/sync-report.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(response.status);
+        var report = await response.json();
+      } catch (error) {
+        box.replaceChildren(el('p', 'notice notice--error', 'No se pudo leer el informe. Probá recargar la página.'));
+        return;
+      }
+
+      var issues = report.issues || [];
+      var stats = report.stats || {};
+      var parts = [];
+
+      var updated = new Date(report.updatedAt);
+      parts.push(el('p', 'status-updated', 'Último cambio publicado: ' + updated.toLocaleString('es-AR', { dateStyle: 'long', timeStyle: 'short' })));
+
+      var summary = el('div', 'status-summary');
+      [
+        [stats.events, 'eventos publicados'], [stats.drafts, 'borradores'], [stats.resources, 'recursos'],
+        [stats.people, 'personas'], [stats.places, 'lugares']
+      ].forEach(function (pair) {
+        var tile = el('div', 'status-tile');
+        tile.append(el('strong', '', String(pair[0] || 0)), el('span', '', pair[1]));
+        summary.append(tile);
+      });
+      parts.push(summary);
+
+      if (issues.length === 0) {
+        parts.push(el('p', 'status-ok', 'Todo en orden: no hay errores, avisos ni traducciones pendientes.'));
+      }
+
+      GROUPS.forEach(function (group) {
+        var list = issues.filter(function (issue) { return issue.level === group.level; });
+        if (list.length === 0) return;
+        var section = el('section', 'status-group');
+        section.append(el('h2', '', group.title + ' (' + list.length + ')'), el('p', '', group.help));
+        var ul = el('ul', 'status-list');
+        list.forEach(function (issue) {
+          var li = el('li', 'status-item level-' + issue.level);
+          var where = 'Pestaña «' + (TABS[issue.tab] || issue.tab) + '», fila ' + issue.row + (issue.id ? ' · ' + issue.id : '');
+          li.append(el('span', 'status-where', where), el('span', '', issue.message));
+          ul.append(li);
+        });
+        section.append(ul);
+        parts.push(section);
+      });
+
+      parts.push(el('p', 'status-updated', 'Los cambios de la planilla tardan hasta una hora en llegar a la web y a esta página.'));
+      box.replaceChildren.apply(box, parts);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "linea-de-tiempo-acgpm",
+  "private": true,
+  "description": "Línea de tiempo «De Gales a la Patagonia» — Asociación Cultural Galesa de Puerto Madryn",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "sincronizar": "node scripts/sync-sheet.mjs",
+    "revisar": "node scripts/sync-sheet.mjs --revisar",
+    "probar-plantilla": "node scripts/sync-sheet.mjs --desde scripts/plantilla",
+    "servir": "python3 -m http.server 8000 --directory site",
+    "test": "node --test scripts/test/*.test.mjs"
+  }
+}

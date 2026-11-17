@@ -1,0 +1,141 @@
+{
+  "site.title": {
+    "es": "De Gales a la Patagonia",
+    "cy": "O Gymru i Batagonia",
+    "en": "From Wales to Patagonia"
+  },
+  "site.subtitle": {
+    "es": "Una historia compartida",
+    "cy": "Hanes a rennir",
+    "en": "A shared history"
+  },
+  "site.intro": {
+    "es": "La historia de la colonia galesa del Chubut, contada a través de sus momentos, sus lugares y su gente.",
+    "cy": "Hanes y Wladfa Gymreig yn Chubut, drwy ei digwyddiadau, ei lleoedd a'i phobl.",
+    "en": "The story of the Welsh settlement in Chubut, told through its moments, its places and its people."
+  },
+  "site.notice": {
+    "es": "Versión de prueba: los textos y las imágenes son una muestra y están en revisión.",
+    "cy": "Fersiwn brawf: sampl yw'r testunau a'r delweddau, ac maent yn cael eu hadolygu.",
+    "en": "Prototype: the texts and images are a sample and are still under review."
+  },
+  "footer.project": {
+    "es": "Un proyecto de la Asociación Cultural Galesa de Puerto Madryn, Chubut, Argentina.",
+    "cy": "Prosiect gan Gymdeithas Ddiwylliannol Gymreig Porth Madryn, Chubut, yr Ariannin.",
+    "en": "A project of the Welsh Cultural Association of Puerto Madryn, Chubut, Argentina."
+  },
+
+  "a11y.skip": { "es": "Saltar al contenido", "cy": "Neidio i'r cynnwys", "en": "Skip to content" },
+  "lang.label": { "es": "Idioma", "cy": "Iaith", "en": "Language" },
+  "nav.sections": { "es": "Secciones", "cy": "Adrannau", "en": "Sections" },
+  "nav.timeline": { "es": "Línea de tiempo", "cy": "Llinell amser", "en": "Timeline" },
+  "nav.map": { "es": "Mapa", "cy": "Map", "en": "Map" },
+  "nav.people": { "es": "Personas", "cy": "Pobl", "en": "People" },
+  "nav.activity": { "es": "Actividad", "cy": "Gweithgaredd", "en": "Activity" },
+
+  "pending": { "es": "Traducción pendiente", "cy": "Cyfieithiad i ddod", "en": "Translation pending" },
+
+  "filter.label": { "es": "Filtrar por categoría", "cy": "Hidlo yn ôl categori", "en": "Filter by category" },
+  "filter.all": { "es": "Todas", "cy": "Pob un", "en": "All" },
+  "timeline.count": { "es": "Eventos a la vista: {n}", "cy": "Digwyddiadau i'w gweld: {n}", "en": "Events shown: {n}" },
+  "timeline.empty": {
+    "es": "No hay eventos en esta categoría.",
+    "cy": "Nid oes digwyddiadau yn y categori hwn.",
+    "en": "There are no events in this category."
+  },
+
+  "event.more": { "es": "Leer más", "cy": "Darllen mwy", "en": "Read more" },
+  "event.people": { "es": "Personas", "cy": "Pobl", "en": "People" },
+  "event.media": { "es": "Audio y video", "cy": "Sain a fideo", "en": "Audio and video" },
+  "event.sources": { "es": "Fuentes y enlaces", "cy": "Ffynonellau a dolenni", "en": "Sources and links" },
+  "event.seeOnMap": { "es": "Ver en el mapa", "cy": "Gweld ar y map", "en": "See on the map" },
+  "event.prev": { "es": "Anterior", "cy": "Blaenorol", "en": "Previous" },
+  "event.next": { "es": "Siguiente", "cy": "Nesaf", "en": "Next" },
+  "event.transcript": { "es": "Transcripción", "cy": "Trawsgrifiad", "en": "Transcript" },
+  "event.playVideo": { "es": "Reproducir video", "cy": "Chwarae'r fideo", "en": "Play video" },
+
+  "media.source": { "es": "Fuente", "cy": "Ffynhonnell", "en": "Source" },
+  "media.newTab": { "es": "(se abre en otra pestaña)", "cy": "(yn agor mewn tab newydd)", "en": "(opens in a new tab)" },
+
+  "dialog.close": { "es": "Cerrar", "cy": "Cau", "en": "Close" },
+  "dialog.copyLink": { "es": "Copiar enlace", "cy": "Copïo'r ddolen", "en": "Copy link" },
+  "dialog.copied": { "es": "Enlace copiado", "cy": "Copïwyd y ddolen", "en": "Link copied" },
+
+  "map.title": { "es": "Mapa", "cy": "Map", "en": "Map" },
+  "map.intro": {
+    "es": "Los lugares de esta historia, a los dos lados del Atlántico.",
+    "cy": "Lleoedd yr hanes hwn, o boptu'r Iwerydd.",
+    "en": "The places in this story, on both sides of the Atlantic."
+  },
+  "map.all": { "es": "Ver todo", "cy": "Gweld y cyfan", "en": "Show all" },
+  "map.north": { "es": "Gran Bretaña", "cy": "Prydain", "en": "Britain" },
+  "map.south": { "es": "Patagonia", "cy": "Patagonia", "en": "Patagonia" },
+  "map.places": { "es": "Lugares", "cy": "Lleoedd", "en": "Places" },
+  "map.show": { "es": "Mostrar en el mapa", "cy": "Dangos ar y map", "en": "Show on the map" },
+  "map.noEvents": {
+    "es": "Todavía no hay eventos en este lugar.",
+    "cy": "Nid oes digwyddiadau yn y lle hwn eto.",
+    "en": "No events at this place yet."
+  },
+  "map.error": {
+    "es": "No se pudo cargar el mapa. Abajo está la lista de lugares.",
+    "cy": "Nid oedd modd llwytho'r map. Mae'r rhestr o leoedd isod.",
+    "en": "The map could not be loaded. The list of places is below."
+  },
+
+  "people.title": { "es": "Personas", "cy": "Pobl", "en": "People" },
+  "people.intro": {
+    "es": "Quienes impulsaron esta historia y quienes la vivieron.",
+    "cy": "Y rhai a ysgogodd yr hanes hwn a'r rhai a fu'n rhan ohono.",
+    "en": "Those who set this story in motion and those who lived it."
+  },
+  "people.events": { "es": "En la línea de tiempo", "cy": "Yn y llinell amser", "en": "In the timeline" },
+  "people.more": { "es": "Más información", "cy": "Rhagor o wybodaeth", "en": "More information" },
+  "people.portraitCredit": { "es": "Retrato", "cy": "Portread", "en": "Portrait" },
+
+  "activity.title": {
+    "es": "Ordená los eventos",
+    "cy": "Rhowch y digwyddiadau mewn trefn",
+    "en": "Put the events in order"
+  },
+  "activity.intro": {
+    "es": "¿Qué pasó primero? Ordená estos eventos del más antiguo al más reciente y comprobá tu respuesta.",
+    "cy": "Beth ddigwyddodd gyntaf? Rhowch y digwyddiadau hyn mewn trefn, o'r cynharaf i'r diweddaraf, a gwiriwch eich ateb.",
+    "en": "What happened first? Put these events in order, from the earliest to the latest, then check your answer."
+  },
+  "activity.up": { "es": "Subir", "cy": "Symud i fyny", "en": "Move up" },
+  "activity.down": { "es": "Bajar", "cy": "Symud i lawr", "en": "Move down" },
+  "activity.check": { "es": "Comprobar", "cy": "Gwirio", "en": "Check" },
+  "activity.retry": { "es": "Seguir intentando", "cy": "Rhoi cynnig arall arni", "en": "Keep trying" },
+  "activity.new": { "es": "Jugar de nuevo", "cy": "Chwarae eto", "en": "Play again" },
+  "activity.moved": {
+    "es": "«{title}» está ahora en el lugar {n} de {total}.",
+    "cy": "Mae «{title}» bellach yn safle {n} o {total}.",
+    "en": "“{title}” is now in position {n} of {total}."
+  },
+  "activity.result": {
+    "es": "{n} de {total} en el lugar correcto.",
+    "cy": "{n} o {total} yn y lle cywir.",
+    "en": "{n} of {total} in the right place."
+  },
+  "activity.perfect": {
+    "es": "¡Muy bien! Todos los eventos están en orden.",
+    "cy": "Da iawn! Mae pob digwyddiad yn ei le.",
+    "en": "Well done! Every event is in order."
+  },
+  "activity.correct": { "es": "Correcto", "cy": "Cywir", "en": "Correct" },
+  "activity.wrong": { "es": "Fuera de lugar", "cy": "Ddim yn ei le", "en": "Out of place" },
+  "activity.notEnough": {
+    "es": "Todavía no hay suficientes eventos para jugar.",
+    "cy": "Nid oes digon o ddigwyddiadau i chwarae eto.",
+    "en": "There are not enough events to play yet."
+  },
+
+  "date.full": { "es": "{d} de {month} de {y}", "cy": "{d} {month} {y}", "en": "{d} {month} {y}" },
+  "date.month": { "es": "{month} de {y}", "cy": "{month} {y}", "en": "{month} {y}" },
+  "months": {
+    "es": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+    "cy": ["Ionawr", "Chwefror", "Mawrth", "Ebrill", "Mai", "Mehefin", "Gorffennaf", "Awst", "Medi", "Hydref", "Tachwedd", "Rhagfyr"],
+    "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  }
+}

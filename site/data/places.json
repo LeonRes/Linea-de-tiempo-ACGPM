@@ -1,0 +1,47 @@
+[
+  {
+    "id": "liverpool",
+    "name": {
+      "es": "Liverpool",
+      "cy": "Lerpwl",
+      "en": "Liverpool"
+    },
+    "lat": 53.4084,
+    "lon": -2.9916,
+    "description": {
+      "es": "Puerto inglés del que zarpó el Mimosa en 1865.",
+      "cy": "Y porthladd yn Lloegr yr hwyliodd y Mimosa ohono ym 1865.",
+      "en": "The English port from which the Mimosa sailed in 1865."
+    }
+  },
+  {
+    "id": "puerto-madryn",
+    "name": {
+      "es": "Puerto Madryn",
+      "cy": "Porth Madryn",
+      "en": "Puerto Madryn"
+    },
+    "lat": -42.7692,
+    "lon": -65.0385,
+    "description": {
+      "es": "Sobre el Golfo Nuevo. En Punta Cuevas desembarcaron los colonos galeses.",
+      "cy": "Ar lan y Bae Newydd (Golfo Nuevo). Yn Punta Cuevas y glaniodd yr ymfudwyr o Gymru.",
+      "en": "On Golfo Nuevo (New Bay). The Welsh settlers came ashore at Punta Cuevas."
+    }
+  },
+  {
+    "id": "rawson",
+    "name": {
+      "es": "Rawson",
+      "cy": "Trerawson",
+      "en": "Rawson"
+    },
+    "lat": -43.3002,
+    "lon": -65.1023,
+    "description": {
+      "es": "Primer pueblo de la colonia, cerca de la desembocadura del río Chubut.",
+      "cy": "Tref gyntaf y Wladfa, ger aber afon Chubut.",
+      "en": "The first town of the settlement, near the mouth of the Chubut river."
+    }
+  }
+]
