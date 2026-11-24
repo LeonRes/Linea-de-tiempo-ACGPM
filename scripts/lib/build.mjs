@@ -235,6 +235,7 @@ export function build(tables, options = {}) {
 
   // --- eventos ------------------------------------------------------------
   const draftIds = new Set();
+  const relatedRefs = new Map(); // id del evento → { row, refs } de la columna «relacionados», se resuelve al final
   const events = readEntities('eventos', previous.events, ({ row, cells, id, fail }) => {
     if (isDraft(cells.publicado)) { draftIds.add(id); return 'draft'; }
     const event = { id };
@@ -293,6 +294,8 @@ export function build(tables, options = {}) {
     if (!event.summary.es && !event.body.es) report('aviso', 'eventos', row, id, 'El evento no tiene resumen ni texto en español.');
     pendingTranslations('eventos', row, id, { título: event.title, resumen: event.summary, texto: event.body });
 
+    if (cells.relacionados) relatedRefs.set(id, { row, refs: cells.relacionados.split(/[,;\n]/) });
+
     event.resources = [];
     return event;
   });
@@ -303,6 +306,20 @@ export function build(tables, options = {}) {
   events.sort((a, b) => a.year - b.year || (a.month ?? 0) - (b.month ?? 0) || (a.day ?? 0) - (b.day ?? 0));
   const eventsById = new Map(events.map((event) => [event.id, event]));
   for (const event of events) event.resources = []; // también en los que se conservaron de antes
+
+  // «relacionados»: otros eventos que la ficha sugiere para seguir leyendo (además de los automáticos).
+  for (const event of events) {
+    const entry = relatedRefs.get(event.id);
+    if (!entry) { delete event.related; continue; }
+    event.related = [];
+    for (const raw of entry.refs) {
+      const other = slug(raw);
+      if (!other || other === event.id || event.related.includes(other)) continue;
+      if (eventsById.has(other)) event.related.push(other);
+      else if (!draftIds.has(other)) report('aviso', 'eventos', entry.row, event.id, `El evento relacionado «${raw.trim()}» no existe en la pestaña «eventos». Se ignora.`);
+    }
+    if (event.related.length === 0) delete event.related;
+  }
 
   // --- recursos -----------------------------------------------------------
   for (const { row, cells } of readTable('recursos', tables.recursos)) {

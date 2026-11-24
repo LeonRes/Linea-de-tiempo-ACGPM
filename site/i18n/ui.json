@@ -66,6 +66,13 @@
   "event.seeOnMap": { "es": "Ver en el mapa", "cy": "Gweld ar y map", "en": "See on the map" },
   "event.prev": { "es": "Anterior", "cy": "Blaenorol", "en": "Previous" },
   "event.next": { "es": "Siguiente", "cy": "Nesaf", "en": "Next" },
+  "event.related": { "es": "Para seguir explorando", "cy": "I barhau i archwilio", "en": "Keep exploring" },
+  "event.navLane": { "es": "Recorriendo la franja «{lane}»", "cy": "Yn dilyn y stribed «{lane}»", "en": "Browsing the \"{lane}\" band" },
+  "related.chosen": { "es": "Tema relacionado", "cy": "Pwnc cysylltiedig", "en": "Related topic" },
+  "related.person": { "es": "También con {name}", "cy": "Hefyd gyda {name}", "en": "Also with {name}" },
+  "related.place": { "es": "También en {place}", "cy": "Yr un lle: {place}", "en": "Also in {place}" },
+  "related.lane": { "es": "Misma franja: {lane}", "cy": "Yr un stribed: {lane}", "en": "Same band: {lane}" },
+  "related.time": { "es": "En la misma época", "cy": "Yn yr un cyfnod", "en": "Around the same time" },
   "event.transcript": { "es": "Transcripción", "cy": "Trawsgrifiad", "en": "Transcript" },
   "event.playVideo": { "es": "Reproducir video", "cy": "Chwarae'r fideo", "en": "Play video" },
 

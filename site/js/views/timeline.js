@@ -104,6 +104,13 @@ function visibleEvents() {
   return data.events.filter((event) => !activeLane || laneOf(event)?.id === activeLane);
 }
 
+// La usa la ficha para que «anterior» y «siguiente» sigan la franja elegida en el filtro.
+// Devuelve null si no hay filtro (se recorren todos los eventos).
+export function filteredSequence() {
+  const lane = activeLane && data.laneById.get(activeLane);
+  return lane ? { lane, events: visibleEvents() } : null;
+}
+
 // ---------------------------------------------------------------------------
 // Vista «línea»: franjas horizontales
 

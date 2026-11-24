@@ -1,6 +1,7 @@
 // Ficha de un evento o de una persona. Se muestra en una ventana (<dialog>) sobre la vista actual.
 
-import { data, laneOf, placeOf, peopleOf, eventsOf, colorClasses } from './data.js';
+import { data, laneOf, placeOf, peopleOf, eventsOf, colorClasses, relatedEvents } from './data.js';
+import { filteredSequence } from './views/timeline.js';
 import { t, tr, trText, formatDate, isoDate, getLang } from './i18n.js';
 import { el, trEl, paragraphs, icon, safeUrl, isExternal, externalLink, announce } from './dom.js';
 import { VIDEO_EMBED_PREFIXES } from './config.js';
@@ -72,9 +73,15 @@ export function showEvent(event) {
   const players = resources.filter((r) => r.type === 'audio' || r.type === 'video');
   const links = resources.filter((r) => (r.type === 'link' || r.type === 'document') && safeUrl(r.src));
 
-  const index = data.events.indexOf(event);
-  const previous = data.events[index - 1];
-  const next = data.events[index + 1];
+  // Si en la línea de tiempo hay una franja elegida (p. ej. «Argentina»), anterior y siguiente
+  // recorren solo esa franja. Si el evento no es de esa franja (llegó desde otra vista), todos.
+  const filtered = filteredSequence();
+  const sequence = filtered?.events.includes(event) ? filtered : null;
+  const list = sequence?.events ?? data.events;
+  const index = list.indexOf(event);
+  const previous = list[index - 1];
+  const next = list[index + 1];
+  const related = relatedEvents(event);
 
   show(el('article', { class: `detail-content ${colorClasses(event)}` },
     el('header', { class: 'detail-header' },
@@ -105,9 +112,17 @@ export function showEvent(event) {
       el('h3', {}, t('event.sources')),
       el('ul', { class: 'source-list' }, links.map(sourceItem)),
     ),
-    (previous || next) && el('nav', { class: 'detail-nav', 'aria-label': t('nav.timeline') },
-      previous ? neighbourLink(previous, 'prev') : el('span'),
-      next ? neighbourLink(next, 'next') : el('span'),
+    related.length > 0 && el('section', { class: 'detail-section' },
+      el('h3', {}, t('event.related')),
+      el('ul', { class: 'related-list' }, related.map(relatedItem)),
+    ),
+    (previous || next) && el('nav', {
+      class: 'detail-nav',
+      'aria-label': sequence ? t('event.navLane', { lane: trText(sequence.lane.name) }) : t('nav.timeline'),
+    },
+    sequence && el('p', { class: 'detail-nav-scope' }, t('event.navLane', { lane: trText(sequence.lane.name) })),
+    previous ? neighbourLink(previous, 'prev') : el('span'),
+    next ? neighbourLink(next, 'next') : el('span'),
     ),
   ), 'detalle-titulo');
 }
@@ -120,6 +135,26 @@ function neighbourLink(event, direction) {
       direction === 'next' && icon('arrowRight'),
     ),
     trEl('span', { class: 'detail-nav-title' }, event.title, { badge: false }),
+  );
+}
+
+function relatedItem({ event, reason }) {
+  const why = {
+    chosen: () => t('related.chosen'),
+    person: () => t('related.person', { name: reason.item.name }),
+    place: () => t('related.place', { place: trText(reason.item.name) }),
+    lane: () => t('related.lane', { lane: trText(reason.item.name) }),
+    time: () => t('related.time'),
+  }[reason.type]();
+  return el('li', {},
+    el('a', { class: `related-card ${colorClasses(event)}`, href: `#/evento/${event.id}` },
+      el('span', { class: 'related-dot', 'aria-hidden': 'true' }),
+      el('span', { class: 'related-text' },
+        el('time', { datetime: isoDate(event) }, formatDate(event)),
+        trEl('span', { class: 'related-title' }, event.title, { badge: false }),
+        el('span', { class: 'related-why' }, why),
+      ),
+    ),
   );
 }
 
@@ -184,7 +219,7 @@ function sourceItem(resource) {
   const label = trText(resource.title) || url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
   const titleInfo = tr(resource.title);
   const link = isExternal(url)
-    ? externalLink(url, { class: 'source-link' }, resource.type === 'document' && icon('document'), label)
+    ? externalLink(url, { class: 'source-link' }, icon(resource.type === 'document' ? 'document' : 'link'), label)
     : el('a', { class: 'source-link', href: url }, icon('document'), label);
   if (titleInfo.text && titleInfo.lang !== getLang()) link.lang = titleInfo.lang;
   return el('li', {},

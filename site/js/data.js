@@ -43,3 +43,36 @@ export function colorClasses(event) {
 
 // Número para ordenar por fecha (los eventos ya vienen ordenados; se usa en la actividad).
 export const sortKey = (event) => event.year * 10000 + (event.month ?? 0) * 100 + (event.day ?? 0);
+
+// Sugerencias «para seguir explorando» desde la ficha de un evento.
+// Primero los que la planilla indica en «relacionados»; después se completa con los eventos
+// que comparten personas, lugar o franja, prefiriendo los más cercanos en el tiempo.
+// Cada sugerencia lleva el motivo para mostrarlo: { event, reason: { type, item? } }.
+export function relatedEvents(event, limit = 4) {
+  const chosen = [];
+  const taken = new Set([event.id]);
+  for (const id of event.related ?? []) {
+    const other = data.eventById.get(id);
+    if (!other || taken.has(id)) continue;
+    taken.add(id);
+    chosen.push({ event: other, reason: { type: 'chosen' } });
+  }
+
+  const candidates = [];
+  for (const other of data.events) {
+    if (taken.has(other.id)) continue;
+    const person = (other.people ?? []).find((id) => event.people?.includes(id));
+    const samePlace = event.place && other.place === event.place;
+    const sameLane = laneOf(other) === laneOf(event);
+    const distance = Math.abs(other.year - event.year);
+    const score = (person ? 4 : 0) + (samePlace ? 3 : 0) + (sameLane ? 1 : 0) + (distance <= 5 ? 1 : 0);
+    if (!person && !samePlace && score < 2) continue; // solo cerca en el tiempo o solo misma franja: no alcanza
+    const reason = person ? { type: 'person', item: data.personById.get(person) }
+      : samePlace ? { type: 'place', item: placeOf(event) }
+      : sameLane ? { type: 'lane', item: laneOf(event) }
+      : { type: 'time' };
+    candidates.push({ event: other, reason, score, distance });
+  }
+  candidates.sort((a, b) => b.score - a.score || a.distance - b.distance || sortKey(a.event) - sortKey(b.event));
+  return [...chosen, ...candidates].slice(0, Math.max(limit, chosen.length));
+}

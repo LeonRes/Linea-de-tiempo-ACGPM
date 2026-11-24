@@ -8,7 +8,7 @@ Esta guía es para quienes cargan y corrigen el contenido de la línea de tiempo
 
 ## Cómo funciona
 
-La web reproduce la línea de tiempo impresa de la Asociación: cada evento es un círculo dentro de una **franja** (Gales, Argentina, la colonia galesa, Chubut y Puerto Madryn), ordenado por fecha. Los eventos que tienen foto se ven como una «cápsula» blanca con la foto arriba. En el celular se ven como una lista por décadas.
+La web reproduce la línea de tiempo impresa de la Asociación: cada evento es un círculo dentro de una **franja** (Gales, Argentina, Chubut / Y Wladfa y Puerto Madryn), ordenado por fecha. Los eventos que tienen foto se ven como una «cápsula» blanca con la foto arriba. En el celular se ven como una lista por décadas.
 
 1. Ustedes escriben en la planilla.
 2. Una vez por hora, el sitio lee la planilla, revisa que todo esté bien y se actualiza solo.
@@ -43,10 +43,13 @@ En la pestaña **eventos**, en la primera fila vacía:
 | titulo_es / _cy / _en | Título corto | |
 | resumen_es / _cy / _en | Una o dos oraciones. Se ven al abrir el evento y en la vista de lista. | |
 | texto_es / _cy / _en | El texto completo que se lee al abrir el evento. Para separar párrafos, dejar una línea en blanco. | |
+| relacionados | Opcional. ids de otros eventos que conviene leer después de este, separados por comas. Aparecen primero en «Para seguir explorando» | `desembarco, fundacion-de-rawson` |
 
 > Para escribir varias líneas dentro de una celda: **Ctrl + Enter** (en Mac, **⌘ + Enter**).
 
 El orden de las filas no importa: la web ordena los eventos por fecha.
+
+Al final de cada evento la web muestra **«Para seguir explorando»**: hasta cuatro eventos para seguir leyendo. Primero van los de la columna `relacionados`; el resto lo completa la web sola con eventos que comparten personas, lugar o franja. Si alguien eligió una franja (por ejemplo «Argentina»), los botones «Anterior» y «Siguiente» recorren solo esa franja.
 
 ## Agregar fotos, documentos, audios, videos y enlaces
 
@@ -105,7 +108,7 @@ Abran la **página de estado**. Ahí aparecen:
 
 **¿Puedo agregar una franja nueva?** Sí, en la pestaña **franjas** (por ejemplo «Trelew» o «Mundo»). Las franjas aparecen en la web en el orden de las filas, y el color de fondo se asigna según ese orden. En la columna `bandera` va la imagen que se ve a la izquierda, igual que una foto.
 
-**¿Cómo elijo el color de un círculo?** Con la columna `color` del evento. Si la dejan vacía, el círculo toma el color de su franja (verde en Gales y en la colonia galesa, azul en Argentina, blanco en Chubut).
+**¿Cómo elijo el color de un círculo?** Con la columna `color` del evento. Si la dejan vacía, el círculo toma el color de su franja (verde en Gales y en Chubut / Y Wladfa, azul en Argentina, blanco en Puerto Madryn).
 
 **¿Puedo compartir el enlace de un evento?** Sí: al abrir un evento, el botón «Copiar enlace» copia su dirección, en el idioma que se está viendo.
 

@@ -2,7 +2,7 @@
 
 Sitio web trilingüe (español, galés, inglés) con una línea de tiempo interactiva sobre la colonia galesa del Chubut, para la **Asociación Cultural Galesa de Puerto Madryn** (ACGPM). Es el prototipo de la «Fase 1» del plan de trabajo de la Asociación: 10 a 20 eventos, mapa, personas, recursos enlazados a colecciones originales y una actividad educativa.
 
-El diseño reproduce la **línea de tiempo impresa que la Asociación usa hoy** (un afiche horizontal): franjas por ámbito (Gales, Argentina, la colonia galesa, Chubut y Puerto Madryn) con su bandera, barra de décadas gris oscura arriba y abajo, eventos en círculos de color con letra condensada y «cápsulas» blancas para los eventos con foto.
+El diseño reproduce la **línea de tiempo impresa que la Asociación usa hoy** (un afiche horizontal): franjas por ámbito (Gales, Argentina, Chubut / Y Wladfa —la colonia galesa— y Puerto Madryn) con su bandera, barra de décadas gris oscura arriba y abajo, eventos en círculos de color con letra condensada y «cápsulas» blancas para los eventos con foto.
 
 - Sitio publicado: https://leonres.github.io/Linea-de-tiempo-ACGPM/
 - Planilla con el contenido: https://docs.google.com/spreadsheets/d/1qWxX6QHwLKEnbV8p8aCVxe1P1WOr_QzUJYPcln8X-yA/edit
@@ -64,6 +64,8 @@ scripts/
 - **Vista «línea»** (pantallas de 768 px o más): una grilla CSS. Columnas = décadas (antes de 1800, siglos, como en el afiche), desde la primera hasta la última con eventos, sin saltear décadas vacías; filas = franjas. En cada celda los eventos se apilan de a dos y siguen hacia la derecha (`grid-auto-flow: column dense`); los eventos con foto son cápsulas que ocupan las dos filas. La columna de banderas queda fija a la izquierda (`position: sticky`) y la barra de herramientas fija debajo del menú. Se recorre con las flechas, arrastrando con el mouse, con el trackpad o con el teclado.
 - **Vista «lista»**: los mismos eventos por décadas, con el color de su franja. Es la única en celulares y una opción en escritorio (se recuerda en `localStorage`).
 - Los eventos se ordenan por fecha. Las franjas se muestran en el orden de la pestaña «franjas»; el filtro por franja muestra solo esa fila.
+- Con una franja elegida en el filtro, «anterior» y «siguiente» de la ficha recorren solo esa franja (`filteredSequence()` en timeline.js); sin filtro, o si se llegó desde otra vista, todos los eventos.
+- La ficha termina con «Para seguir explorando» (`relatedEvents()` en data.js): primero los de la columna `relacionados`, después los que comparten personas, lugar o franja (con el motivo a la vista), hasta 4.
 - Accesibilidad: cada franja es una `<section>` con su nombre como `<h2>`; cada evento es un enlace con año y título completos (el recorte del texto es solo visual); orden de tabulación: franja por franja, en orden cronológico.
 
 ## Decisiones y por qué
@@ -94,7 +96,7 @@ Los nombres de columna se normalizan (minúsculas, sin acentos: «Año» = `anio
 
 | Pestaña | Columnas (★ obligatoria) | JSON (`site/data/`) |
 |---|---|---|
-| `eventos` | id★, año★, mes, dia, año_fin, franja, color (verde, azul, bordo, naranja, gris, blanco), lugar, personas (ids separados por coma), publicado (`si`/`no`), titulo_es★/cy/en, resumen_*, texto_* (párrafos separados por línea en blanco) | `events.json`: `{ id, year, month?, day?, endYear?, lane, color?, place?, people[], title, summary, body, resources[] }`, ordenado por fecha. Sin franja válida → primera franja + aviso. |
+| `eventos` | id★, año★, mes, dia, año_fin, franja, color (verde, azul, bordo, naranja, gris, blanco), lugar, personas (ids separados por coma), publicado (`si`/`no`), titulo_es★/cy/en, resumen_*, texto_* (párrafos separados por línea en blanco), relacionados (ids de eventos, opcional) | `events.json`: `{ id, year, month?, day?, endYear?, lane, color?, place?, people[], related?, title, summary, body, resources[] }`, ordenado por fecha. Sin franja válida → primera franja + aviso. |
 | `recursos` | evento★, tipo★ (imagen, documento, audio, video, enlace), archivo★ (nombre en `site/media/`, enlace de Drive o URL), titulo_*, descripcion_* (texto alternativo o transcripción), credito, licencia, fuente (URL de la colección original) | dentro de cada evento: `{ type, src, embed?, title?, description?, credit?, license?, source? }`. La primera imagen es la foto de la cápsula. |
 | `personas` | id★, nombre★, nacimiento, fallecimiento, rol_*, bio_*, retrato (como `archivo`), retrato_credito, enlace | `people.json` |
 | `lugares` | id★, nombre_es★/cy/en, latitud★, longitud★ (acepta coma o punto decimal), descripcion_* | `places.json` |
@@ -147,8 +149,8 @@ Las banderas son imágenes en `site/media/franjas/` y se pueden cambiar desde la
 
 ## Limitaciones conocidas y pendientes
 
-- **Contenido de muestra:** 12 eventos (3 por franja), 3 personas y 5 lugares, tomados del afiche de la Asociación para el período 1848–1876. Las traducciones al galés las redactó una IA y **necesitan revisión de un hablante nativo** antes de mostrarse al público. Datos para verificar con la Asociación: el embarque el 25 de mayo y la partida el 28 de mayo de 1865, el número de pasajeros del Mimosa (varía según la fuente) y el tratado «Chegüelcho» de 1865.
-- Las imágenes de muestra vienen de Wikimedia Commons (dominio público, con crédito y enlace a la fuente en cada recurso). Las banderas están recortadas del afiche de la Asociación.
+- **Contenido de muestra:** 12 eventos (Puerto Madryn tiene 2 desde que la fundación de Rawson pasó a «Chubut / Y Wladfa»), 3 personas y 5 lugares, tomados del afiche de la Asociación para el período 1848–1876. Las traducciones al galés las redactó una IA y **necesitan revisión de un hablante nativo** antes de mostrarse al público. Datos para verificar con la Asociación: el embarque el 25 de mayo y la partida el 28 de mayo de 1865, el número de pasajeros del Mimosa (varía según la fuente) y el tratado «Chegüelcho» de 1865.
+- Las imágenes de muestra vienen de Wikimedia Commons (dominio público, con crédito y enlace a la fuente en cada recurso). Las banderas están recortadas del afiche de la Asociación. La de la franja `puerto-madryn` sigue siendo el archivo `franjas/chubut.jpg` (escudo con sol, trigo y engranaje): confirmar con la Asociación si corresponde a Puerto Madryn.
 - Del afiche todavía no se reproducen la franja de infraestructura de Puerto Madryn (acueducto, gas, puerto, aeropuerto), los datos de población en la barra inferior, la fila de presidentes argentinos ni las fotos de fondo de cada franja.
 - No se achican las imágenes automáticamente: la sincronización avisa si una pesa más de 1,5 MB.
 - Fuera de alcance por ahora (previsto en el plan de la Asociación para fases siguientes): más actividades educativas, búsqueda, historias orales.

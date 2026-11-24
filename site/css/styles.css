@@ -400,6 +400,18 @@ main { flex: 1; width: 100%; max-width: var(--page-width); margin: 0 auto; paddi
 .event-links a span { font: 500 var(--text-base)/1.3 var(--font-display); text-decoration: underline; text-decoration-color: var(--color-line); }
 .event-links a:hover span { text-decoration-color: currentColor; }
 
+.related-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.6rem; }
+.related-card {
+  display: flex; align-items: flex-start; gap: 0.7rem; height: 100%; padding: 0.7rem 0.85rem;
+  border: 1px solid var(--color-line); border-radius: var(--radius-sm); color: var(--color-text); text-decoration: none;
+}
+.related-card:hover { border-color: var(--color-ink); }
+.related-dot { flex: none; width: 1.1rem; height: 1.1rem; margin-top: 0.15rem; border-radius: 50%; background: var(--bubble-bg); border: 2px solid var(--bubble-border); }
+.related-text { display: grid; gap: 0.15rem; }
+.related-text time { color: var(--color-text-soft); font: 500 var(--text-xs)/1.3 var(--font-display); letter-spacing: 0.03em; }
+.related-title { font: 500 var(--text-base)/1.3 var(--font-display); }
+.related-why { color: var(--color-text-soft); font-size: var(--text-xs); }
+
 .player { display: grid; gap: 0.5rem; }
 .player-title { font-weight: 600; }
 .player audio, .player video { width: 100%; }
@@ -418,6 +430,7 @@ main { flex: 1; width: 100%; max-width: var(--page-width); margin: 0 auto; paddi
 .detail-nav-link { display: grid; gap: 0.25rem; align-content: start; padding: 0.75rem 0.9rem; border: 1px solid var(--color-line); border-radius: var(--radius-sm); color: var(--color-text); text-decoration: none; }
 .detail-nav-link:hover { border-color: var(--color-ink); }
 .detail-nav-link--next { text-align: right; }
+.detail-nav-scope { grid-column: 1 / -1; color: var(--color-text-soft); font-size: var(--text-sm); }
 .detail-nav-label { display: inline-flex; align-items: center; gap: 0.35em; color: var(--color-text-soft); font: 600 var(--text-xs)/1.2 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; }
 .detail-nav-link--next .detail-nav-label { justify-content: flex-end; }
 .detail-nav-title { font: 500 var(--text-base)/1.3 var(--font-display); }

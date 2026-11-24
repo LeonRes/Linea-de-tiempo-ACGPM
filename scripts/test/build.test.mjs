@@ -207,3 +207,14 @@ test('el script de sincronización funciona en modo revisión con la plantilla',
   assert.match(output, /Eventos publicados: 12/);
   assert.match(output, /Errores: 0/);
 });
+
+test('«relacionados»: resuelve ids escritos a mano y avisa los inexistentes', () => {
+  const tables = sampleTables();
+  setCell(tables, 'eventos', 'desembarco', 'relacionados', 'Fundación de Rawson, desembarco, no-existe');
+  const result = build(tables);
+  const event = result.data.events.find((e) => e.id === 'desembarco');
+  assert.deepEqual(event.related, ['fundacion-de-rawson'], 'normaliza, saca el propio evento y el inexistente');
+  assert.ok(issuesFor(result, 'desembarco').some((i) => i.level === 'aviso' && i.message.includes('no-existe')));
+  setCell(tables, 'eventos', 'desembarco', 'relacionados', '');
+  assert.equal(build(tables).data.events.find((e) => e.id === 'desembarco').related, undefined);
+});
